@@ -1,0 +1,19 @@
+
+
+QUERY n°1: SELECT * FROM `students` WHERE `date_of_birth` =                          1990;
+
+QUERY n°2: SELECT * FROM `courses` WHERE `cfu` > 10; 
+
+QUERY n°3: SELECT * FROM `students` WHERE YEAR(CURRENT_DATE()) - YEAR(`date_of_birth`) > 30;
+
+QUERY n°4: 
+
+QUERY n°5: SELECT * FROM `exams` WHERE `date` = 2020-06-20 AND TIME(`hour`) >= 14;
+
+QUERY n°6: 
+
+QUERY n°7: SELECT * FROM `departments`;
+
+QUERY n°8: SELECT COUNT(*) AS "senza_telefono" FROM `teachers` WHERE `phone` IS NULL;
+
+
