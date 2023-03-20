@@ -1,0 +1,39 @@
+QUERY n1:
+SELECT year, COUNT(*) as num_students
+FROM `students`
+GROUP BY year
+ORDER BY year DESC;
+
+
+QUERY n2:
+SELECT `office_address`, COUNT(DISTINCT `id`) as "insegnanti_in_questo_edificcio" 
+FROM `teachers` 
+GROUP BY `office_address` 
+HAVING COUNT(DISTINCT `id`) > 1;
+
+
+QUERY n3:
+SELECT `exam_id`, AVG() AS "media_voti" 
+FROM `vote`
+GROUP BY `exam_id`;
+
+
+QUERY n4:
+SELECT `department_id`, COUNT(*) AS "corsi_per_dipartimento" 
+FROM `degrees` 
+GROUP BY `department_id`;
+
+<!-- QUERY JOIN -->
+
+QUERY n1:
+
+     
+QUERY n3:
+
+
+QUERY n3:
+
+
+QUERY n4:
+
+
