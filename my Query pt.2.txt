@@ -1,39 +1,87 @@
+Lezione (A) del 21/03/2023 
+
 QUERY n1:
-SELECT year, COUNT(*) as num_students
+SELECT COUNT(*) AS num_students YEAR(`enrolment_date`) AS `anno`
 FROM `students`
-GROUP BY year
+GROUP BY YEAR(`enrolment_date`)
 ORDER BY year DESC;
 
 
 QUERY n2:
-SELECT `office_address`, COUNT(DISTINCT `id`) as "insegnanti_in_questo_edificcio" 
+SELECT `office_address`, COUNT(*) AS "insegnanti_in_questo_edificcio" 
 FROM `teachers` 
 GROUP BY `office_address` 
 HAVING COUNT(DISTINCT `id`) > 1;
 
 
 QUERY n3:
-SELECT `exam_id`, AVG() AS "media_voti" 
-FROM `vote`
+SELECT `exam_id`, AVG(`vote`) AS "media_voti" 
+FROM `exam_student`
 GROUP BY `exam_id`;
 
 
 QUERY n4:
-SELECT `department_id`, COUNT(*) AS "corsi_per_dipartimento" 
+SELECT COUNT(*) AS "corsi_per_dipartimento", `department_id` 
 FROM `degrees` 
 GROUP BY `department_id`;
 
 <!-- QUERY JOIN -->
 
 QUERY n1:
-
+SELECT `students`.*
+FROM `students`
+JOIN `degrees` ON `students`.`degrees_id`
+ORDER BY `students`.`degrees_id` DESC
+WHERE `degrees`.`name` = "corso laurea in economia"
      
-QUERY n3:
+
+QUERY n2:
+SELECT `degrees`.*
+FROM `degrees`
+JOIN `deparments` ON `deparments`.`id` = `degrees`.`deparment_id`
+WHERE `degrees`.`level` = "magistrale"
+AND `deparments`.`name` = "dipartimento neuroscienza"
 
 
 QUERY n3:
+SELECT `courses`.*
+FROM `course_teacher`
+JOIN `courses` ON `course_id` = course_teacher`.`course_id`
+WHERE `course_teacher`.`teacher_id` = 44
 
 
 QUERY n4:
+SELECT 
+    `students`.`id` AS "id_student",
+    `students`.`name` AS "name_student",
+    `students`.`surname` AS "surname_student",
+
+    `degrees`.`id` AS "id_degree",
+    `degrees`.`name` AS "name_degree",  
+
+    `deparments`.`id` AS "id_deparment",
+    `deparments`.`name` AS "name_department"
+FROM `students` 
+JOIN `degrees` ON `degrees`.`id` = `students`.`degree_id`
+JOIN `departments` ON `degrees`.`department_id` = `deparments`.`id`
+ORDER BY `students`.`surname`, `students`.`name`, `students`.`id`
+
+///*************************************************************///
+
+QUERY n5:
+SELECT
+    `degrees`.`id` AS "id_degree",
+    `courses`.`id` AS "id_course",
+    `teachers`.`id` AS "id_teacher",
+
+    `degrees`.`name` AS "name_degree",
+    `courses`.`id` AS "id_course",
+    `teachers`.`id` AS "id_teacher",
+FROM `degrees`
 
 
+QUERY n6:
+SELECT
+
+
+QUERY n7 (BONUS):
