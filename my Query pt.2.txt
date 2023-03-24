@@ -47,7 +47,9 @@ QUERY n3:
 SELECT `courses`.*
 FROM `course_teacher`
 JOIN `courses` ON `course_id` = course_teacher`.`course_id`
-WHERE `course_teacher`.`teacher_id` = 44
+JOIN `teachers` ON `teachers`.`id` = course_teacher`.`teacher_id`
+WHERE `teachers`.`name` = "Fulvio"
+AND `teachers`.`surname` = "Amato";
 
 
 QUERY n4:
@@ -70,18 +72,29 @@ ORDER BY `students`.`surname`, `students`.`name`, `students`.`id`
 
 QUERY n5:
 SELECT
-    `degrees`.`id` AS "id_degree",
+    `degrees`.`id` AS "id_degree",            
     `courses`.`id` AS "id_course",
     `teachers`.`id` AS "id_teacher",
 
     `degrees`.`name` AS "name_degree",
-    `courses`.`id` AS "id_course",
-    `teachers`.`id` AS "id_teacher",
+    `courses`.`name` AS "name_course",
+    `teachers`.`name` AS "name_teacher",
+    `teachers`.`surname` AS "surname_teacher",
 FROM `degrees`
-
+JOIN `courses` ON `degrees`.`id` = `courses`.`degree_id`
+JOIN `courses_teacher` ON `courses`.`id` = `courses_teacher`.`course_id`
+JOIN `courses_teacher` ON `teachers`.`id` = `courses_teacher`.`teacher_id`;
 
 QUERY n6:
-SELECT
-
+SELECT DISTINCT
+    `teachers`.`id` AS "id_teacher",
+    `teachers`.`name` AS "name_teacher",
+    `teachers`.`surname` AS "surname_teacher",
+FROM `degrees`
+JOIN `courses` ON `degrees`.`id` = `courses`.`degree_id`
+JOIN `courses_teacher` ON `courses`.`id` = `courses_teacher`.`course_id`
+JOIN `teachers` ON `teachers`.`id` = `courses_teacher`.`teacher_id`;
+JOIN `deparments` ON `deparments`.`id` = `degrees`.`department_id`;
+WHERE `deparments`.`name` = "Dipartimento di matematica";
 
 QUERY n7 (BONUS):
